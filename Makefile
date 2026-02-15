@@ -12,7 +12,8 @@ LIBFT = ./libft/libft.a
 
 # Sources
 SRCS =	main.c \
-		./validation_map/validate_map.c
+		./validation_map/validate_map.c \
+		./validation_map/read_map.c
 
 
 # Objs
@@ -41,7 +42,7 @@ $(LIBFT):
 
 
 $(NAME): $(OBJS) $(FT_PRINTF) $(G_N_L) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(FT_PRINTF)  $(G_N_L) $(LIBFT) -o $(NAME)
+	$(CC)	$(CFLAGS) $(OBJS) $(FT_PRINTF)	$(G_N_L) $(LIBFT) -o $(NAME)
 
 
 

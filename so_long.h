@@ -6,7 +6,7 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/15 17:01:49 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/15 17:44:59 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,28 @@
 # include "./get_next_line/get_next_line.h"
 # include "./libft/libft.h"
 
+
 /********	main	********/
+
 
 int		main(int argc, char *argv[]);
 
-char **read_map(char *filename);
 
 /********	validation_map	********/
+
 
 int		validate_map(char **map);
 int		right_map(char **map);
 int		walls_top_down(char **map);
 int		walls_sides(char **map);
 
+
+/********	read_map	********/
+
+
+int		count_lines(char *filename);
+int		line_len(char *filename);
+char	**read_map(char *filename);
 
 
 
