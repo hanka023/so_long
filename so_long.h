@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/15 17:03:45 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/15 17:01:49 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h" 
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
-int main(int argc, char *argv[])
-{
-	int fd; 
-	char *line;
-	char *filename;
-	char **map;
-	
-	(void)argc;
-	(void)argv;
-	filename = "map/map_ko.ber";
-	fd = open(filename, O_RDONLY);
-	map = read_map(filename);
-	if(!validate_map(map))
-		return(0);
-	while ((line = get_next_line(fd)))
-		ft_printf("%s", line);
-	close (fd);
-}
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include "./ft_printf/ft_printf.h"
+# include "./get_next_line/get_next_line.h"
+# include "./libft/libft.h"
+
+/********	main	********/
+
+int		main(int argc, char *argv[]);
+
+char **read_map(char *filename);
+
+/********	validation_map	********/
+
+int		validate_map(char **map);
+int		right_map(char **map);
+int		walls_top_down(char **map);
+int		walls_sides(char **map);
+
+
+
+
+#endif
