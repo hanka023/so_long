@@ -1,34 +1,34 @@
 *This project has been created as part of the 42 curriculum by haskalov*
 
-##Description
+## Description
 
 This project is small 2d-video game 
 
 
 
-##Instructions
+## Instructions
 
 
-###Compilation
+### Compilation
 
 
 Compile program use make (or make re)
 
 
-###Use:
+### Use:
 
 
-###Example:
-
-
-
-##Resources
+### Example:
 
 
 
+## Resources
+
+AI used as an advisor
 
 
-###Testers
+
+### Testers
 
 
 
