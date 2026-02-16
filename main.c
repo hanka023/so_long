@@ -3,19 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanka <hanka@student.42.fr>                +#+  +:+       +#+        */
+/*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/16 01:39:32 by hanka            ###   ########.fr       */
+/*   Updated: 2026/02/16 22:06:59 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "so_long.h"
 
+
+void free_map(char **map)
+{
+    int i = 0;
+
+    while (map[i])
+    {
+        free(map[i]);
+        i++;
+    }
+    free(map);
+}
+
 int main(int argc, char *argv[])
 {
-	int fd;
-	char *line;
+	// int fd;
+	// char *line;
 	char *filename;
 	char **map;
 	int i;
@@ -23,21 +36,25 @@ int main(int argc, char *argv[])
 	i = 0;
 	(void)argc;
 	(void)argv;
-	filename = "map/map_ko.ber";
-	fd = open(filename, O_RDONLY);
+	filename = "map/map.ber";
+	//fd = open(filename, O_RDONLY);
 	map = read_map(filename);
-	if(!validate_map(map))
+	if (!map)
 		return(0);
-	while ((line = get_next_line(fd)))
+
+	ft_printf("read ok\n");
+	if(!validate_map(map))
 	{
-		ft_printf("%s", line);
-		free(line);
+		free_map(map);
+		return(0);
 	}
-	close (fd);
+	ft_printf("validace ok\n");
 	while (map[i])
 	{
-		free(map[i]);  // uvolníme každý řádek
-		i++;
+		ft_printf("%s", map[i]);
+		++i;
 	}
-	free(map);
+	//close (fd);
+	free_map(map);
+	return(0);
 }

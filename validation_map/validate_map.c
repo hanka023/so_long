@@ -3,31 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanka <hanka@student.42.fr>                +#+  +:+       +#+        */
+/*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/16 01:30:11 by hanka            ###   ########.fr       */
+/*   Updated: 2026/02/16 22:25:38 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../so_long.h"
+
+
+
+
 
 int	right_map(char **map)
 {
 	int	i;
 	int	len;
 	int	len2;
+	ft_printf("\n righ map start\n");
 
-	if (!map || !map[0])
-   		return (0);
+
+
+if (!map)
+{
+    printf("map is NULL\n");
+    return 0;
+}
+if (!map[0])
+{
+    printf("first row is NULL\n");
+    return 0;
+}
+
+
+
+	
+	// if (!map || !map[0])
+   	// 	return (0);
 	i = 1;
-	len = ft_strlen(map[0]);
+	ft_printf(" map ok\n");
+	len = ft_strlen_map(map[0]);
 	if (!len)
 		return (0);
 
+	ft_printf("strlen ok\n");	
 	while (map[i] != NULL)
 	{
-		len2 = ft_strlen (map[i]);
+		len2 = ft_strlen_map(map[i]);
 		if (len2 == len)
 			++i;
 		else
@@ -67,7 +90,19 @@ int	walls_sides(char **map)
 	j = 0;
 	while(map[i] != NULL)
 	{
-		if (map[i][j] != 1)
+		ft_printf("%c\n",map[i][j] );
+		if (map[i][j] != '1')
+			return(0);
+		++i;
+	}
+	i = 0;
+	j = ft_strlen_map(map[1]) - 1;
+	j = 13;
+	ft_printf("%dj:\n",j );
+	while(map[i] != NULL)
+	{
+		ft_printf("\nposledni cislo: %c\n",(map[i][j]) );
+		if (map[i][j] != '1')
 			return(0);
 		++i;
 	}
@@ -76,10 +111,14 @@ int	walls_sides(char **map)
 
 int validate_map(char **map)
 {
-	map = NULL;
+	
+	ft_printf("validate start");
 	if (!right_map(map))
 		return(0);
-
+	ft_printf("right map ok");
+	if (!walls_sides(map))
+		return(0);
+	ft_printf("walls sides ok");
 	return(1);
 
 }

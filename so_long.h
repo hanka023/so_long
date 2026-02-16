@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanka <hanka@student.42.fr>                +#+  +:+       +#+        */
+/*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/15 23:30:40 by hanka            ###   ########.fr       */
+/*   Updated: 2026/02/16 21:36:52 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		walls_sides(char **map);
 
 /********	read_map	********/
 
-
+int		ft_strlen_map(char *s);
 int		count_lines(char *filename);
 int		line_len(char *filename);
 char	**read_map(char *filename);

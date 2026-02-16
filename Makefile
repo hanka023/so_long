@@ -50,7 +50,6 @@ $(NAME): $(OBJS) $(FT_PRINTF) $(G_N_L) $(LIBFT)
 	$(CC)	$(CFLAGS) $(OBJS) $(FT_PRINTF)	$(G_N_L) $(LIBFT) -o $(NAME)
 
 
-
 # Translate .c → .o
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

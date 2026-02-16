@@ -3,15 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanka <hanka@student.42.fr>                +#+  +:+       +#+        */
+/*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/16 09:36:44 by hanka            ###   ########.fr       */
+/*   Updated: 2026/02/16 21:56:20 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../so_long.h"
 
+
+int	ft_strlen_map(char *s)
+
+{
+	int	i;
+
+	i = 0;
+	while (*s && (*s !='\n' && *s !='\0'))
+	{
+		++i;
+		++s;
+	}
+	return (i);
+}
+
+
+void free_lines(char **lines)
+{
+    int i = 0;
+
+    while (lines[i])
+    {
+        free(lines[i]);
+        i++;
+    }
+    free(lines);
+}
 
 int count_lines(char *filename)
 {
@@ -22,8 +49,10 @@ int count_lines(char *filename)
 	lines = 0;
 	fd = open(filename, O_RDONLY);
 	while ((line = get_next_line(fd)))
+	{
 		++lines;
-	free(line);
+		free(line);
+	}
 	return(lines);
 }
 
@@ -44,7 +73,7 @@ int line_len(char *filename)
 		close(fd);
 		return (0);
 	}
-	len = ft_strlen(line);
+	len = ft_strlen_map(line);
 	free(line);
 	close(fd);
 	return(len);
@@ -59,22 +88,19 @@ char **read_map(char *filename)
 	int		count;
 	char	**lines;
 	char	*line;
-	// int		len;
 
 	i = 0;
-	// len = line_len(filename);
 	count = count_lines(filename);
-	lines = malloc (sizeof (char *) * (count + 1));
-	if (! lines)
+	lines = malloc (sizeof (*lines) * (count + 1));
+	if(!lines)
 		return (NULL);
-
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		free(lines);
+		free_lines(lines);
 		return (NULL);
 	}
-	while ((line = get_next_line(fd)))
+	while (i < count && (line = get_next_line(fd)))
 	{
 		lines[i] = line;
 		++i;
