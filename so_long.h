@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hanka <hanka@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/15 17:44:59 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/15 23:30:40 by hanka            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,17 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+#include <string.h>
 # include "./ft_printf/ft_printf.h"
 # include "./get_next_line/get_next_line.h"
 # include "./libft/libft.h"
 
+
+typedef struct s_point
+{
+	int x;
+	int y;
+}	t_point;
 
 /********	main	********/
 
@@ -44,6 +51,14 @@ int		count_lines(char *filename);
 int		line_len(char *filename);
 char	**read_map(char *filename);
 
+
+/********	flood_fill	********/
+
+void	fill(char **tab,char target, t_point size,  int row, int col);
+void	flood_fill(char **tab, t_point size, t_point begin);
+char	**make_area(char **zone);
+void	print_tab(char **tab);
+int		flood_fill_main(void);
 
 
 #endif
