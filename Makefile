@@ -17,9 +17,12 @@ LIBFT = ./libft/libft.a
 
 # Sources
 SRCS =	main.c \
+		utils.c \
 		./validation_map/validate_map.c \
+		./validation_map/validate_map2.c \
 		./validation_map/read_map.c \
-		./validation_map/flood_fill.c
+		./validation_map/flood_fill.c \
+		./validation_map/player_position.c \
 
 # Objscd
 OBJS = $(SRCS:%.c=%.o)

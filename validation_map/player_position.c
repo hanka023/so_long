@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   player_position.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/17 17:28:32 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:11:27 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+# include "../so_long.h"
 
-int main(int argc, char *argv[])
+
+t_point find_player(char **map)
 {
-	char *filename;
-	char **map;
-	int i;
-
+	int	i;
+	int	j;
+	t_point pos;
+	
 	i = 0;
-	(void)argc;
-	(void)argv;
-	filename = "map/map.ber";
-	map = read_map(filename);
-	if (!map)
-		return(0);
-	if(!validate_map(map))
-	{
-		free_map(map);
-		return(0);
+	while(map[i] != NULL)
+	{	
+		j = 0;
+		while (map[i][j] != '\n' && map[i][j] != '\0')
+		{
+			if (map[i][j] == 'P')
+			{
+				pos.x = j;
+				pos.y = i;	
+				return (pos);
+			}
+			++j;
+		}
+		++i;
 	}
-	ft_printf("\n puvodni mapa \n");
-	print_map (map);
-	ft_printf("\n\n");
-	flood_fill_main(map);
-	free_map(map);
-	return(0);
+	return ((t_point){-1, -1});
 }
+

@@ -13,74 +13,104 @@
 
 # include "../so_long.h"
 
+void ft_strncpy(char *dest, const char *src)
+{
+	int i;
+	
+	if (!dest || !src)
+		return;
+	i = 0;
+	while ((src[i] != '\0'))
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return;
+}
+
 
 void fill(char **tab,char target, t_point size,  int row, int col)
 {
-	if (row <0 || col < 0  || row >= size.y || col >= size.x)
+	if (row < 0 || col < 0  || row >= size.y || col >= size.x)
 		return;
-
-	if ( tab [row][col] == 'F' || tab[row][col] != target)
+	if ( tab [row][col] == 'X' || tab[row][col] == '1')
 		return;
-
-	//else if (tab [row][col] == target)
-	tab [row][col] = 'F';
-
+	else if ( tab [row][col] == '0' )
+	{
+	tab [row][col] = 'X';
 	fill (tab, target, size, row -1, col);
 	fill (tab, target, size, row +1, col);
 	fill (tab, target, size, row, col +1);
 	fill (tab, target, size, row, col -1);
-
+	}
+	else if ( tab [row][col] == 'P' )
+	{
+	fill (tab, target, size, row -1, col);
+	fill (tab, target, size, row +1, col);
+	fill (tab, target, size, row, col +1);
+	fill (tab, target, size, row, col -1);
+	}
+	else if (tab [row][col] == 'C'  || tab [row][col] == 'E')
+	{
+	fill (tab, target, size, row -1, col);
+	fill (tab, target, size, row +1, col);
+	fill (tab, target, size, row, col +1);
+	fill (tab, target, size, row, col -1);
+	}
 }
+
 void  flood_fill(char **tab, t_point size, t_point begin)
 {
-	char target = tab[begin.y][begin.x];
+	//char target = tab[begin.y][begin.x];
+
+	char target = '0';
+	// char target_p = 'P';
+	// char target_e = 'E';
+	// char target_c = 'C';
 	fill(tab, target, size, begin.y, begin.x);
 }
 
-
-
-char **make_area(char **zone)
+char **make_area(int len, int rows, char **map)
 {
-    int rows = 5; // víme, že máme 5 řádků (můžeš to parametrizovat)
-    int cols = strlen(zone[0]); // délka prvního řádku
-    char **area = malloc(sizeof(char *) * rows);
+	int y;
+	char **area;
 
-    for (int y = 0; y < rows; y++)
+	y = 0;
+	area = malloc(sizeof(char *) * (rows + 1));
+	if (!area)
+    	return (NULL);
+	while (y < rows)
     {
-        area[y] = malloc(sizeof(char) * (cols + 1)); // +1 pro '\0'
-        strcpy(area[y], zone[y]);
+        area[y] = malloc(sizeof(char) * (len + 1)); 
+		if (!area[y])
+			return (NULL);
+        ft_strncpy(area[y], map[y]);
+		++y;
     }
-
+	area[rows] = NULL;
     return area;
 }
 
-
-void print_tab(char **tab)
+int flood_fill_main(char **area)
 {
-    for (int y = 0; y < 5; y++) // 5 řádků
-    {
-        printf("%s\n", tab[y]);
-    }
-}
-
-
-int flood_fill_main(void)
-{
-	char **area;
-	t_point size = {8, 5};
-	t_point begin = {2, 2};
-	char *zone[] = {
-		"11111111",
-		"10001001",
-		"10010001",
-		"10110001",
-		"11100001",
-	};
-	area = make_area(zone);
-	print_tab(area);
-	flood_fill(area, size, begin);
-	//putc('\n');
-	printf("\n");
-	print_tab(area);
+	int len;
+	int rows;
+	char **new_area;
+	t_point size;
+	t_point player_position;
+	len = ft_strlen(area[0]);
+	rows = count_lines(area);
+	size.x = len;
+	size.y = rows;
+	player_position = find_player(area);
+	if (player_position.x == -1 && player_position.y == -1)
+		return (0);
+	// print_map(area);
+	new_area = make_area(len, rows, area);
+	flood_fill(new_area, size, player_position);
+	printf("\n new area \n");
+	print_map(new_area);
+	free_map(new_area);
 	return (0);
 }

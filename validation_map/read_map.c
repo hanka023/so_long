@@ -6,27 +6,11 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/16 21:56:20 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/17 16:38:56 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../so_long.h"
-
-
-int	ft_strlen_map(char *s)
-
-{
-	int	i;
-
-	i = 0;
-	while (*s && (*s !='\n' && *s !='\0'))
-	{
-		++i;
-		++s;
-	}
-	return (i);
-}
-
 
 void free_lines(char **lines)
 {
@@ -40,7 +24,7 @@ void free_lines(char **lines)
     free(lines);
 }
 
-int count_lines(char *filename)
+int count_lines_filename(char *filename)
 {
 	int fd;
 	char *line;
@@ -82,7 +66,6 @@ int line_len(char *filename)
 
 char **read_map(char *filename)
 {
-
 	int		i;
 	int		fd;
 	int		count;
@@ -90,7 +73,7 @@ char **read_map(char *filename)
 	char	*line;
 
 	i = 0;
-	count = count_lines(filename);
+	count = count_lines_filename(filename);
 	lines = malloc (sizeof (*lines) * (count + 1));
 	if(!lines)
 		return (NULL);
@@ -106,6 +89,6 @@ char **read_map(char *filename)
 		++i;
 	}
 	lines[count] = NULL;
-	close (fd);
+	close(fd);
 	return (lines);
 }

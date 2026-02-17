@@ -6,15 +6,11 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/16 22:31:44 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:46:03 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../so_long.h"
-
-
-
-
 
 int	right_map(char **map)
 {
@@ -70,14 +66,12 @@ int	walls_sides(char **map)
 	j = 0;
 	while(map[i] != NULL)
 	{
-		ft_printf("%c\n",map[i][j] );
 		if (map[i][j] != '1')
 			return(0);
 		++i;
 	}
 	i = 0;
 	j = ft_strlen_map(map[1]) - 1;
-	ft_printf("%dj:\n",j );
 	while(map[i] != NULL)
 	{
 		if (map[i][j] != '1')
@@ -93,5 +87,7 @@ int validate_map(char **map)
 		return(0);
 	if (!walls_sides(map))
 		return(0);
+	if (!player_col_esc(map))
+		return (0);
 	return(1);
 }
