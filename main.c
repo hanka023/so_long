@@ -3,65 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanka <hanka@student.42.fr>                +#+  +:+       +#+        */
+/*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/18 02:26:24 by hanka            ###   ########.fr       */
+/*   Updated: 2026/02/18 21:02:00 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "so_long.h"
 
-void maps()
+int maps()
 {
 	char *filename;
 	char **map;
 
-	filename = "map/map.ber";
+	filename = "map/map_ko.ber";
 	map = read_map(filename);
 	if (!map)
-		return ;
-	if(!validate_map(map))
-	{
+	{	
 		free_map(map);
-		return ;
+		return (0);
 	}
+	if(!validate_map(map))
+		return (0);
 	ft_printf("\n puvodni mapa \n");
 	print_map (map);
 	ft_printf("\n\n");
-	flood_fill_main(map);
+	if (!flood_fill_main(map))
+		return (0);
 	ft_printf("\n");
 	free_map(map);
-	return ;
+	return (1);
 }
-
-// int main(void)
-// {
-
-// 	void	*mlx;
-// 	void	*win;
-// 	void	*img;
-// 	 void    *mlx_win;
-// 	int width;
-// 	int height;
-
-
-// 	maps();
-
-// 	mlx = mlx_init();
-// 	mlx_win = mlx_new_window(mlx, 800,600, "so_long");
-// 	img = mlx_xpm_file_to_image(mlx, "player.xpm",&width, &height );
-// 	if (!img)
-// 		return (1);
-
-
-// 	mlx_string_put(mlx, mlx_win, 100, 100, 0xFFFFFF, "Hello");
-// 	mlx_put_image_to_window(mlx, win, img, 100, 100);
-// 	mlx_loop(mlx);
-
-// 	return(0);
-// }
-
 
 int main(void)
 {
@@ -72,7 +45,11 @@ int main(void)
 	int		height;
 
 	maps();
-
+	if (!maps())
+		{
+			ft_printf("Error\n");
+			return (0);
+		}
 	mlx = mlx_init();
 	if (!mlx)
 		return (1);

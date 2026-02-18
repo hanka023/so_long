@@ -6,7 +6,7 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/17 16:38:56 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/18 20:30:08 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int count_lines_filename(char *filename)
 		++lines;
 		free(line);
 	}
+	close(fd);
 	return(lines);
 }
 
@@ -55,6 +56,7 @@ int line_len(char *filename)
 	if (!line)
 	{
 		close(fd);
+		free (line);
 		return (0);
 	}
 	len = ft_strlen_map(line);
@@ -78,11 +80,8 @@ char **read_map(char *filename)
 	if(!lines)
 		return (NULL);
 	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-	{
-		free_lines(lines);
-		return (NULL);
-	}
+	if (!fd)
+		return (0);
 	while (i < count && (line = get_next_line(fd)))
 	{
 		lines[i] = line;

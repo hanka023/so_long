@@ -29,7 +29,6 @@ void ft_strncpy(char *dest, const char *src)
 	return;
 }
 
-
 void fill(char **tab,char target, t_point size,  int row, int col)
 {
 	if (row < 0 || col < 0  || row >= size.y || col >= size.x)
@@ -62,12 +61,7 @@ void fill(char **tab,char target, t_point size,  int row, int col)
 
 void  flood_fill(char **tab, t_point size, t_point begin)
 {
-	//char target = tab[begin.y][begin.x];
-
 	char target = '0';
-	// char target_p = 'P';
-	// char target_e = 'E';
-	// char target_c = 'C';
 	fill(tab, target, size, begin.y, begin.x);
 }
 
@@ -92,6 +86,34 @@ char **make_area(int len, int rows, char **map)
     return area;
 }
 
+
+
+int zero_check(char **map)
+{
+	int	i;
+	int	j;
+	int zero;
+	
+	if (!map)
+    	return (0);
+	i = 0;
+	zero = 0;
+	while(map[i] != NULL)
+	{	
+		j = 0;
+		while (map[i][j] != '\n' && map[i][j] != '\0')
+		{
+			if (map[i][j] == '0')
+				++zero;
+			++j;
+		}
+		++i;
+	}
+	return (zero);
+}
+
+
+
 int flood_fill_main(char **area)
 {
 	int len;
@@ -106,11 +128,15 @@ int flood_fill_main(char **area)
 	player_position = find_player(area);
 	if (player_position.x == -1 && player_position.y == -1)
 		return (0);
-	// print_map(area);
 	new_area = make_area(len, rows, area);
 	flood_fill(new_area, size, player_position);
-	printf("\n new area \n");
+	printf("\n flod_fill test \n");
 	print_map(new_area);
+	if (zero_check(new_area) > 0)
+	{
+		free_map(new_area);
+		return (0);
+	}
 	free_map(new_area);
-	return (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/17 16:48:48 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/18 21:05:01 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void print_map(char **map)
 		ft_printf("%s", map[i]);
 		++i;
 	}
+	ft_printf("\n");
 	return ;
 }
 

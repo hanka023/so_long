@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanka <hanka@student.42.fr>                +#+  +:+       +#+        */
+/*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/18 00:13:37 by hanka            ###   ########.fr       */
+/*   Updated: 2026/02/18 19:11:32 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_point
 }	t_point;
 
 /********	main	********/
-void	maps();
+int		maps();
 int		main(void);
 
 /********	utils	********/

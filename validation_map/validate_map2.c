@@ -6,7 +6,7 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/17 14:45:23 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/18 21:03:56 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int player(char **map)
 	int	j;
 	int p;
 	
+	if (!map)
+    	return (0);
 	i = 0;
 	p = 0;
 	while(map[i] != NULL)
@@ -27,7 +29,7 @@ int player(char **map)
 		while (map[i][j] != '\n' && map[i][j] != '\0')
 		{
 			if (map[i][j] == 'P')
-				p = 1;
+				++p;
 			++j;
 		}
 		++i;
@@ -45,6 +47,8 @@ int col(char **map)
 	int	j;
 	int c;
 	
+	if (!map)
+    	return (0);
 	i = 0;
 	c = 0;
 	while(map[i] != NULL)
@@ -71,6 +75,8 @@ int esc(char **map)
 	int	j;
 	int e;
 	
+	if (!map)
+    	return (0);
 	i = 0;
 	e = 0;
 	while(map[i] != NULL)
@@ -79,7 +85,7 @@ int esc(char **map)
 		while (map[i][j] != '\n' && map[i][j] != '\0')
 		{
 			if (map[i][j] == 'E')
-				e = 1;	
+				++e;	
 			++j;
 		}
 		++i;
