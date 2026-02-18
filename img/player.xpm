@@ -1,0 +1,23 @@
+/* player.xpm */
+static char *player_xpm[] = {
+"16 16 3 1",       /* šířka 16, výška 16, 3 barvy, 1 znak/pixel */
+"  c #FFFFFF",     /* bílá – pozadí */
+". c #19862B",     /* zelená – oblečení */
+"X c #A51010",     /* červená – hlava */
+"                ",
+"       XX       ",
+"      X..X      ",
+"      X..X      ",
+"       XX       ",
+"      X..X      ",
+"     X....X     ",
+"     X....X     ",
+"      X..X      ",
+"      X..X      ",
+"      X..X      ",
+"      X..X      ",
+"       XX       ",
+"                ",
+"                ",
+"                "
+};

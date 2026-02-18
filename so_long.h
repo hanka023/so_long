@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hanka <hanka@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/17 17:13:02 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/18 00:13:37 by hanka            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
-#include <string.h>
+# include <string.h>
+# include <mlx.h>
 # include "./ft_printf/ft_printf.h"
 # include "./get_next_line/get_next_line.h"
-# include "./libft/libft.h"
+
 
 typedef struct s_point
 {
@@ -29,8 +30,8 @@ typedef struct s_point
 }	t_point;
 
 /********	main	********/
-
-int		main(int argc, char *argv[]);
+void	maps();
+int		main(void);
 
 /********	utils	********/
 
