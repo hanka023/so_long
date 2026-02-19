@@ -16,7 +16,7 @@
 void ft_strncpy(char *dest, const char *src)
 {
 	int i;
-	
+
 	if (!dest || !src)
 		return;
 	i = 0;
@@ -76,7 +76,7 @@ char **make_area(int len, int rows, char **map)
     	return (NULL);
 	while (y < rows)
     {
-        area[y] = malloc(sizeof(char) * (len + 1)); 
+        area[y] = malloc(sizeof(char) * (len + 1));
 		if (!area[y])
 			return (NULL);
         ft_strncpy(area[y], map[y]);
@@ -93,13 +93,13 @@ int zero_check(char **map)
 	int	i;
 	int	j;
 	int zero;
-	
+
 	if (!map)
     	return (0);
 	i = 0;
 	zero = 0;
 	while(map[i] != NULL)
-	{	
+	{
 		j = 0;
 		while (map[i][j] != '\n' && map[i][j] != '\0')
 		{
@@ -130,7 +130,7 @@ int flood_fill_main(char **area)
 		return (0);
 	new_area = make_area(len, rows, area);
 	flood_fill(new_area, size, player_position);
-	printf("\n flod_fill test \n");
+	printf("\n flod_fill test \n\n");
 	print_map(new_area);
 	if (zero_check(new_area) > 0)
 	{

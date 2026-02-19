@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hanka <hanka@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/18 19:11:32 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/19 13:09:37 by hanka            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,37 @@
 # include "./ft_printf/ft_printf.h"
 # include "./get_next_line/get_next_line.h"
 
+# define TILE 64
 
 typedef struct s_point
 {
 	int x;
 	int y;
 }	t_point;
+
+
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
+
+typedef struct s_game
+{
+    void    *mlx;
+    void    *win;
+    void    *floor;
+    void    *wall;
+    void    *player;
+    void    *col;
+    void    *exit;
+    char    **map;
+}   t_game;
+
+
 
 /********	main	********/
 int		maps();
