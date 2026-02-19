@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanka <hanka@student.42.fr>                +#+  +:+       +#+        */
+/*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/19 13:09:37 by hanka            ###   ########.fr       */
+/*   Updated: 2026/02/19 20:24:35 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <fcntl.h>
 # include <string.h>
 # include <mlx.h>
+
+# include <X11/X.h>
+# include <X11/keysym.h>
+
 # include "./ft_printf/ft_printf.h"
 # include "./get_next_line/get_next_line.h"
 
@@ -52,6 +56,14 @@ typedef struct s_game
     char    **map;
 }   t_game;
 
+typedef struct s_images
+{
+	void *floor;
+	void *wall;
+	void *player;
+	void *col;
+	void *exit;
+} t_images;
 
 
 /********	main	********/
