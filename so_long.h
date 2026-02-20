@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hanka <hanka@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/19 20:24:35 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/20 08:59:45 by hanka            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,6 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
-
-typedef struct s_game
-{
-    void    *mlx;
-    void    *win;
-    void    *floor;
-    void    *wall;
-    void    *player;
-    void    *col;
-    void    *exit;
-    char    **map;
-}   t_game;
-
 typedef struct s_images
 {
 	void *floor;
@@ -64,6 +51,23 @@ typedef struct s_images
 	void *col;
 	void *exit;
 } t_images;
+
+typedef struct s_game
+{
+    void    *mlx;
+    void    *win;
+    void    *floor;
+    void    *wall;
+    void    *player;
+	int  	player_y;
+	int 	player_x;
+    void    *col;
+    void    *exit;
+    char    **map;
+	t_images	*images;
+}   t_game;
+
+
 
 
 /********	main	********/
