@@ -6,7 +6,7 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/20 20:25:46 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/20 20:54:47 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,6 @@ void error()
 	ft_printf("Error\n");
 }
 
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-}				t_vars;
 
 // void init_game (void *mlx, void *win, char **map, t_images imgs)
 // {
@@ -172,7 +168,10 @@ int main(void)
 	}
 	print_map (map);
 	mlx = mlx_init();
-	win = mlx_new_window(mlx, 800, 600,"so_long");
+int map_width = (ft_strlen(map[0]) -1)* 32;
+int map_height = count_lines(map) * 32;
+	
+	win = mlx_new_window(mlx, map_width,map_height,"so_long");
 	load_images (mlx, &imgs);
 	render_map (mlx, win, map, &imgs);
 

@@ -6,7 +6,7 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/20 16:43:28 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/20 20:52:04 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ typedef struct s_point
 	int x;
 	int y;
 }	t_point;
+
+typedef struct s_window
+{
+	int width;
+	int height;
+} t_window;
+
+
+typedef struct	s_vars {
+	void	*mlx;
+	void	*win;
+}				t_vars;
 
 
 typedef struct	s_data {
@@ -67,6 +79,7 @@ typedef struct s_game
     char    **map;
 	int		collectibles;
 	t_images	*images;
+	t_window 	window;
 }   t_game;
 
 
