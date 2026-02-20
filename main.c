@@ -6,7 +6,7 @@
 /*   By: hanka <hanka@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/20 09:32:12 by hanka            ###   ########.fr       */
+/*   Updated: 2026/02/20 12:47:53 by hanka            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,11 @@ void render_map(void *mlx, void *win, char **map, t_images *imgs)
 //     return (0);
 // }
 
+int collectibles_null()
+{
 
+
+}
 
 int key_handler(int keycode, t_game *game)
 {
@@ -137,8 +141,20 @@ int key_handler(int keycode, t_game *game)
         new_x++;
 
     // kontrola zdi
-    if (game->map[new_y][new_x] == '1')
+    if (game->map[new_y][new_x] == 'E')
+	{
+		if (game->collectibles = 0)
+		{
+			ft_printf("YOU WIN!!!");
+			return (0);
+		}
+
+	}
+
+
+	 if (game->map[new_y][new_x] == '1')
         return (0);
+
 
     // smaž starou pozici hráče
     game->map[game->player_y][game->player_x] = '0';

@@ -6,7 +6,7 @@
 /*   By: hanka <hanka@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/20 08:59:45 by hanka            ###   ########.fr       */
+/*   Updated: 2026/02/20 11:33:10 by hanka            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_game
     void    *col;
     void    *exit;
     char    **map;
+	int		collectibles;
 	t_images	*images;
 }   t_game;
 
@@ -113,6 +114,6 @@ int		flood_fill_main(char **area);
 /********	player_position	********/
 
 t_point find_player(char **map);
-
+int count_collectibles(char **map);
 
 #endif
