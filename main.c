@@ -6,7 +6,7 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/20 20:54:47 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/20 20:55:35 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,8 +168,8 @@ int main(void)
 	}
 	print_map (map);
 	mlx = mlx_init();
-int map_width = (ft_strlen(map[0]) -1)* 32;
-int map_height = count_lines(map) * 32;
+	int map_width = (ft_strlen(map[0]) -1)* 32;
+	int map_height = count_lines(map) * 32;
 	
 	win = mlx_new_window(mlx, map_width,map_height,"so_long");
 	load_images (mlx, &imgs);
