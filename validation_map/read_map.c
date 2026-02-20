@@ -6,7 +6,7 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/18 20:30:08 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/20 20:20:34 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ void free_lines(char **lines)
 
 int count_lines_filename(char *filename)
 {
-	int fd;
-	char *line;
-	int lines;
+	int		fd;
+	char	*line;
+	int		lines;
 
 	lines = 0;
 	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (0);
 	while ((line = get_next_line(fd)))
 	{
 		++lines;
@@ -65,6 +67,24 @@ int line_len(char *filename)
 	return(len);
 }
 
+// char *read_line(char **lines,int fd)
+// {
+// 	int i;
+// 	char *line;
+	
+// 	i = 0;
+// 	line = get_next_line(fd);
+// 	if(!line)
+// 	{
+// 		free_lines(lines);
+// 		close (fd);
+// 		return (NULL);
+// 	}
+// 	lines[i++] = line;
+// 	return (lines);
+// }
+
+
 
 char **read_map(char *filename)
 {
@@ -80,14 +100,24 @@ char **read_map(char *filename)
 	if(!lines)
 		return (NULL);
 	fd = open(filename, O_RDONLY);
-	if (!fd)
-		return (0);
-	while (i < count && (line = get_next_line(fd)))
+	if (fd < 0)
 	{
-		lines[i] = line;
-		++i;
+		free (lines);
+		return (NULL);
+	}	
+	
+	while (i < count)
+	{
+	 	line = get_next_line(fd);
+		if(!line)
+		{
+			free_lines(lines);
+			close (fd);
+			return (NULL);
+		}
+		lines[i++] = line;
 	}
-	lines[count] = NULL;
+	lines[i] = NULL;
 	close(fd);
 	return (lines);
 }

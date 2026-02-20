@@ -3,41 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanka <hanka@student.42.fr>                +#+  +:+       +#+        */
+/*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/20 12:47:53 by hanka            ###   ########.fr       */
+/*   Updated: 2026/02/20 20:25:46 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "so_long.h"
-
-// int maps()
-// {
-// 	char *filename;
-// 	char **map;
-
-// 	filename = "map/map.ber";
-// 	map = read_map(filename);
-// 	if (!map)
-// 	{
-// 		free_map(map);
-// 		return (0);
-// 	}
-// 	if(!validate_map(map))
-// 		return (0);
-// 	print_map (map);
-// 	ft_printf("\n\n");
-// 	if (!flood_fill_main(map))
-// 		return (0);
-// 	ft_printf("\n");
-
-
-// 	free_map(map);
-// 	return (1);
-// }
-
-
 
 void load_images(void *mlx, t_images *imgs)
 {
@@ -50,12 +23,6 @@ void load_images(void *mlx, t_images *imgs)
 	imgs->col = mlx_xpm_file_to_image(mlx, "img/col.xpm", &w, &h);
 	imgs->exit = mlx_xpm_file_to_image(mlx, "img/exit.xpm", &w, &h);
 }
-
-
-
-
-
-
 
 void render_map(void *mlx, void *win, char **map, t_images *imgs)
 {
@@ -85,95 +52,67 @@ void render_map(void *mlx, void *win, char **map, t_images *imgs)
 	return ;
 }
 
-// int key_handler(int keycode, t_game *game)
-// {
 
-
-//  	if (keycode == 119) // W
-//         game->player_y--;
-//  	else if (keycode == 122) // W
-//         game->player_y++;
-//  	if (keycode == 115) // W
-//         game->player_x++;
-//  	if (keycode == 97) // W
-//         game->player_x--;
-
-
-//     ft_printf("%d\n", keycode);
-//   	render_map(game->mlx, game->win, game->map, game->images);
-
-//     return (0);
-// }
-
-
-// int handle_key(int keycode, t_game *game)
-// {
-//     if (keycode == 119) // W
-//         game->player_y--;
-//  	else if (keycode == 122) // Z
-//         game->player_y++;
-//  	if (keycode == 115) // S
-//         game->player_x++;
-//  	if (keycode == 97) // A
-//         game->player_x--;
-// 	render_map(game->mlx, game->win, game->map, game->images);
-//     return (0);
-// }
-
-int collectibles_null()
+int	close_game(t_game *game)
 {
-
-
+	
+	mlx_destroy_image(game->mlx, game->images ->floor);
+	mlx_destroy_image(game->mlx, game->images -> wall);
+	mlx_destroy_image(game->mlx, game->images -> player);
+	mlx_destroy_image(game->mlx, game->images -> col);
+	mlx_destroy_image(game->mlx, game->images -> exit);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	free_map(game->map);
+	exit(0);
 }
+
 
 int key_handler(int keycode, t_game *game)
-{
-    int new_x = game->player_x;
-    int new_y = game->player_y;
+{	int collectibles;
+    int new_x = game -> player_x;
+    int new_y = game -> player_y;
+	//int moves = game -> moves;
 
-    if (keycode == 119)        // W
+
+	collectibles = count_collectibles(game -> map);
+	
+    if (keycode == 119 || keycode == 65362)        // W
         new_y--;
-    else if (keycode == 115)   // S
+    else if (keycode == 115 || keycode == 65364)   // S
         new_y++;
-    else if (keycode == 97)    // A
+    else if (keycode == 97 || keycode == 65361)    // A
         new_x--;
-    else if (keycode == 100)   // D
-        new_x++;
-
-    // kontrola zdi
-    if (game->map[new_y][new_x] == 'E')
-	{
-		if (game->collectibles = 0)
-		{
-			ft_printf("YOU WIN!!!");
-			return (0);
-		}
-
-	}
-
-
-	 if (game->map[new_y][new_x] == '1')
+    else if (keycode == 100 || keycode == 65363)   // D
+		new_x++;
+	
+ 	if (game->map[new_y][new_x] == 'C')
+        collectibles--;
+	if (game->map[new_y][new_x] == '1')
         return (0);
-
-
-    // smaž starou pozici hráče
-    game->map[game->player_y][game->player_x] = '0';
-
-    // nastav novou pozici
-    game->map[new_y][new_x] = 'P';
-
-    // aktualizuj souřadnice
-    game->player_x = new_x;
-    game->player_y = new_y;
-
-    render_map(game->mlx, game->win, game->map, game->images);
-
-    return (0);
+  	if (game->map[new_y][new_x] == 'E')
+	{
+		if (collectibles == 0)
+			close_game(game);
+		else 
+			return (0);
+	}
+	if (game->map[new_y][new_x] != '1')
+	{
+		++game -> moves;
+		ft_printf("Moves: %d\n",game ->moves);	
+	}
+	if (keycode == 65307)        // W
+        close_game(game);
+ 	game->map[game->player_y][game->player_x] = '0';
+	game->map[new_y][new_x] = 'P';
+	game->player_x = new_x;
+	game->player_y = new_y;
+	
+	render_map(game->mlx, game->win, game->map, game->images);
+	return (0);
 }
-
-
-
-
 
 
 void error()
@@ -186,8 +125,29 @@ typedef struct	s_vars {
 	void	*win;
 }				t_vars;
 
+// void init_game (void *mlx, void *win, char **map, t_images imgs)
+// {
+// 	t_game game;
+
+		
+// 	game.map = map;   // <--- tady přiřadíš načtenou mapu do struktury game
+// 	game.mlx = mlx;   // také sem uložit mlx
+// 	game.win = win;   // a okno
+// 	game.images = &imgs; // obrázky
+// 	game.moves = 0;
+// return ;
+// }
 
 
+int check_map (char **map)
+{
+	if (!map || !validate_map(map) || !flood_fill_main(map))
+	{
+		error();
+		return (0);
+	}
+	return (1);
+}
 
 int main(void)
 {
@@ -196,43 +156,43 @@ int main(void)
 	void *win;
 	t_images imgs;
 	t_game game;
-
 	t_point start;
-
 	char *filename;
-
-
+	
 	filename = "map/map.ber";
 	map = read_map(filename);
-	print_map (map);
+
+	// if (!check_map(map))
+	// 	return (0);
 	if (!map || !validate_map(map) || !flood_fill_main(map))
 	{
 		error();
+		free_map(map); 
 		return (0);
 	}
+	print_map (map);
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 800, 600,"so_long");
 	load_images (mlx, &imgs);
 	render_map (mlx, win, map, &imgs);
 
-
+	//init_game (mlx, win, map, imgs);
 
 	game.map = map;   // <--- tady přiřadíš načtenou mapu do struktury game
 	game.mlx = mlx;   // také sem uložit mlx
 	game.win = win;   // a okno
 	game.images = &imgs; // obrázky
+	game.moves = 0;
 
+	
 	start = find_player(game.map);
 	game.player_x = start.x;
     game.player_y = start.y;
-
 	ft_printf("%d\n",game.player_y) ;
-	// t_vars	vars;
-
 	mlx_key_hook(win, key_handler, &game);
-	//mlx_hook(game.win, 2, 1L<<0, handle_key, &game);
+	mlx_hook(game.win, 17, 0, close_game, &game);
 	render_map (mlx, win, map, &imgs);
 	mlx_loop(mlx);
-	free_map(map);
+	// free_map(map);
 	return (0);
 }
