@@ -6,23 +6,13 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/21 22:05:59 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/22 17:47:45 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+#include "so_long.h"
 
-void	init_game (t_game *game, void *mlx, void *win, char **map, t_images *imgs)
-{
-	game -> mlx = mlx;
-	game -> win = win;
-	game -> map = map;
-	game -> images = imgs;
-	game -> moves = 0;
-	return ;
-}
-
-void key_code(int keycode, t_game *game)
+void	key_code(int keycode, t_game *game)
 {
 	if (keycode == 65307)
 		close_game(game);
@@ -37,7 +27,7 @@ void key_code(int keycode, t_game *game)
 	return ;
 }
 
-void player_moves(t_game *game)
+void	player_moves(t_game *game)
 {
 	if (game->map[game -> new_y][game -> new_x] == '1')
 		return ;
@@ -47,15 +37,15 @@ void player_moves(t_game *game)
 	{
 		if (game -> col == 0)
 		{
-			ft_printf("\nYOU WIN!!!\n\n");	
+			ft_printf("\nYOU WIN!!!\n\n");
 			close_game(game);
 		}
-		else 
+		else
 			return ;
 	}
 	++(game -> moves);
-	ft_printf("Moves: %d\n",game ->moves);	
- 	game->map[game->player_y][game->player_x] = '0';
+	ft_printf ("Moves: %d\n", game -> moves);
+	game->map[game->player_y][game->player_x] = '0';
 	game->map[game -> new_y][game -> new_x] = 'P';
 	game->player_x = game -> new_x;
 	game->player_y = game -> new_y;
@@ -63,8 +53,7 @@ void player_moves(t_game *game)
 }
 
 int	key_handler(int keycode, t_game *game)
-{	
-	
+{
 	game -> new_x = game -> player_x;
 	game -> new_y = game -> player_y;
 	key_code(keycode, game);

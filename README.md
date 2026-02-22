@@ -1,18 +1,26 @@
 *This project has been created as part of the 42 curriculum by haskalov*
 
+
 ## Description
 
 This project is small 2d-video game with graphic library MiniLibX
 
+You need a map of game (map.ber in  map folder) whete '1' are walls, '0' is floor, 
+'P' is player (mouse), 'C' is collectible (cheese) and 'E' is exit (mouse hole). 
+You must have only 1 player, only 1 exit and 1 or more collectibles. Player must
+be able to go from  start to exit and take all collectibles. Player can't go throw wall
+and walls must be around all game place.
+
 
 ### Compilation
 
-Compile program use make (or make re) If is there some problem with compilation, use both make re and after make.
-
+Compile program use make (or make re)
 
 ### Use 
 
-start game:  ./so_long
+start game:  ./so_long  (write "./so_long" into terminal)
+The window with game should appear, if no, in terminal shoud be written "Error". 
+This should happen, if you have not a valid map. 
 
 
 ## Instructions
@@ -37,5 +45,8 @@ AI used well for explanation new terms and functions + for helping understand wh
 
 DEBUG_FLAGS = -g -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer (for segfault + memory leaks)
 
+####Testing norminette without MiniLibx
+
+norminette $(find . -name "*.c" -not -path "./minilibx/*")
 
 

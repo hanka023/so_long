@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_map2.c                                    :+:      :+:    :+:   */
+/*   validate_map_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/21 22:22:28 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:13:27 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../so_long.h"
+#include "../so_long.h"
 
 int	player(char **map)
 {
 	int	i;
 	int	j;
-	int p;
-	
+	int	p;
+
 	if (!map)
 		return (0);
 	i = 0;
 	p = 0;
-	while(map[i] != NULL)
-	{	
+	while (map[i] != NULL)
+	{
 		j = 0;
 		while (map[i][j] != '\n' && map[i][j] != '\0')
 		{
@@ -39,18 +39,18 @@ int	player(char **map)
 		return (0);
 }
 
-int col(char **map)
+int	col(char **map)
 {
 	int	i;
 	int	j;
-	int c;
-	
+	int	c;
+
 	if (!map)
 		return (0);
 	i = 0;
 	c = 0;
-	while(map[i] != NULL)
-	{	
+	while (map[i] != NULL)
+	{
 		j = 0;
 		while (map[i][j] != '\n' && map[i][j] != '\0')
 		{
@@ -66,23 +66,23 @@ int col(char **map)
 		return (0);
 }
 
-int esc(char **map)
+int	esc(char **map)
 {
 	int	i;
 	int	j;
-	int e;
-	
+	int	e;
+
 	if (!map)
 		return (0);
 	i = 0;
 	e = 0;
-	while(map[i] != NULL)
-	{	
+	while (map[i] != NULL)
+	{
 		j = 0;
 		while (map[i][j] != '\n' && map[i][j] != '\0')
 		{
 			if (map[i][j] == 'E')
-				++e;	
+				++e;
 			++j;
 		}
 		++i;
@@ -96,10 +96,10 @@ int esc(char **map)
 int	player_col_esc(char **map)
 {
 	if (!player(map))
-		return(0);
+		return (0);
 	if (!col(map))
-		return(0);
+		return (0);
 	if (!esc(map))
-		return(0);
-	return(1);
+		return (0);
+	return (1);
 }

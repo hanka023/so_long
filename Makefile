@@ -20,20 +20,22 @@ MLX_FLAGS = -lXext -lX11 -lm
 
 
 # Sources
-SRCS =	main.c \
-		utils.c \
-		./validation_map/validate_map.c \
-		./validation_map/validate_map2.c \
-		./validation_map/read_map.c \
-		./validation_map/flood_fill.c \
-		./validation_map/player_position.c \
+SRCS =	./map_part/flood_fill.c \
+		./map_part/load_map.c \
+		./map_part/map_utils.c \
+		./map_part/player_position.c \
+		./map_part/read_map.c \
+		./map_part/validate_map_1.c \
+		./map_part/validate_map_2.c \
+		./game_utils.c \
+		./utils.c \
+		main.c 
 
 # Objscd
 OBJS = $(SRCS:%.c=%.o)
 
 # Target
 all: $(NAME)
-
 
 $(FT_PRINTF):
 	make -C  ./ft_printf
@@ -45,7 +47,7 @@ $(MLX):
 	make -C  ./minilibx
 
 $(NAME): $(OBJS) $(FT_PRINTF) $(G_N_L) $(MLX) 
-	$(CC)	$(CFLAGS) $(OBJS) $(FT_PRINTF)	$(G_N_L)  $(MLX)  $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(OBJS) $(FT_PRINTF)	$(G_N_L)  $(MLX) $(CFLAGS) $(MLX_FLAGS) -o $(NAME)
 
 # Translate .c → .o
 %.o: %.c
@@ -74,3 +76,4 @@ debug: re
 
 # Phony
 .PHONY: all clean fclean re debug
+

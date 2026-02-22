@@ -6,29 +6,31 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/21 22:21:53 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/22 18:22:39 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../so_long.h"
+#include "../so_long.h"
 
-void free_map(char **map)
+void	free_map(char **map)
 {
-    int i = 0;
+	int	i;
 
-    while (map[i])
-    {
-        free(map[i]);
-        i++;
-    }
-    free(map);
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 	return ;
 }
 
-void print_map(char **map)
+void	print_map(char **map)
 {
-    int i = 0;
+	int	i;
 
+	i = 0;
 	while (map[i])
 	{
 		ft_printf("%s", map[i]);
@@ -38,13 +40,14 @@ void print_map(char **map)
 	return ;
 }
 
-int count_lines(char **lines)
+int	count_lines(char **lines)
 {
-    int i = 0;
+	int	i;
 
-    while (lines[i])
-        i++;
-    return(i);
+	i = 0;
+	while (lines[i])
+		i++;
+	return (i);
 }
 
 int	ft_strlen_map(char *s)
@@ -52,7 +55,7 @@ int	ft_strlen_map(char *s)
 	int	i;
 
 	i = 0;
-	while (*s && (*s !='\n' && *s !='\0'))
+	while (*s && (*s != '\n' && *s != '\0'))
 	{
 		++i;
 		++s;
@@ -60,12 +63,12 @@ int	ft_strlen_map(char *s)
 	return (i);
 }
 
-void ft_strncpy_map(char *dest, const char *src)
+void	ft_strncpy_map(char *dest, const char *src)
 {
-	int i;
-	
+	int	i;
+
 	if (!dest || !src)
-		return;
+		return ;
 	i = 0;
 	while ((src[i] != '\0') && (src[i] != '\n'))
 	{
@@ -73,5 +76,5 @@ void ft_strncpy_map(char *dest, const char *src)
 		i++;
 	}
 	dest[i] = '\0';
-	return;
+	return ;
 }
