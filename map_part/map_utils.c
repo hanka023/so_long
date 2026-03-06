@@ -6,7 +6,7 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/22 18:22:39 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/23 16:34:17 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_map(char **map)
 {
 	int	i;
 
+	if (!map)
+		return ;
 	i = 0;
 	while (map[i])
 	{

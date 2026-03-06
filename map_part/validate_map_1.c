@@ -6,11 +6,40 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/22 18:22:55 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/23 16:30:44 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+int	player(char **map)
+{
+	int	i;
+	int	j;
+	int	p;
+
+	if (!map)
+		return (0);
+	i = 0;
+	p = 0;
+	while (map[i] != NULL)
+	{
+		j = 0;
+		while (map[i][j] != '\n' && map[i][j] != '\0')
+		{
+			if (map[i][j] == 'P')
+				++p;
+			++j;
+		}
+		++i;
+	}
+	if (p == 1)
+		return (1);
+	else if (p > 1)
+		return (2);
+	else
+		return (0);
+}
 
 int	right_map(char **map)
 {
@@ -35,54 +64,42 @@ int	right_map(char **map)
 	return (1);
 }
 
-int	walls_top_down(char **map)
+int	player_col_esc_0(char **map)
 {
-	int	i;
-	int	j;
-	int	last;
-
-	i = 0;
-	j = 0;
-	last = 0;
-	while (map[last] != NULL)
-		++last;
-	if (last < 3)
-		return (0);
-	last--;
-	while (map[0][j] != '\n' && map[0][j] != '\0')
+	if (!ch(map))
 	{
-		if (map[i][j] != '1' || map[last][j] != '1')
-			return (0);
-		++j;
+		error_msg("Incorrect char in map!");
+		return (0);
+	}
+	if (!player(map))
+	{
+		error_msg("No player!");
+		return (0);
+	}
+	if (!col(map))
+	{
+		error_msg("No collectible!");
+		return (0);
+	}
+	if (!esc(map))
+	{
+		error_msg("No escape!");
+		return (0);
 	}
 	return (1);
 }
 
-int	walls_sides(char **map)
+int	player_col_esc_2(char **map)
 {
-	int	i;
-	int	j;
-	int	len;
-
-	i = 0;
-	j = 0;
-	len = ft_strlen_map(map[0]);
-	while (map[i] != NULL)
+	if (player(map) == 2)
 	{
-		while (map[i] != NULL)
-		{
-			if (map[i][0] != '1')
-				return (0);
-			++i;
-		}
+		error_msg(">1 Player!");
+		return (0);
 	}
-	i = 0;
-	j = len - 1;
-	while (map[i] != NULL)
+	if (esc(map) == 2)
 	{
-		if (map[i][j] != '1')
-			return (0);
-		++i;
+		error_msg(">1 Exit!");
+		return (0);
 	}
 	return (1);
 }
@@ -90,12 +107,23 @@ int	walls_sides(char **map)
 int	validate_map(char **map)
 {
 	if (!right_map(map))
+	{
+		error_msg("Not correct map!");
 		return (0);
+	}
 	if (!walls_top_down(map))
+	{
+		error_msg("Not walls!");
 		return (0);
+	}
 	if (!walls_sides(map))
+	{
+		error_msg("Not walls!");
 		return (0);
-	if (!player_col_esc(map))
+	}
+	if (!player_col_esc_0(map))
+		return (0);
+	if (!player_col_esc_2(map))
 		return (0);
 	return (1);
 }

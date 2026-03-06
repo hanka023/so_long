@@ -6,7 +6,7 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/22 18:44:19 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/23 16:33:27 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	fill(char **tab, t_point size, int r, int c)
 {
 	if (r < 0 || c < 0 || r >= size.y || c >= size.x)
 		return ;
-	if (tab [r][c] == 'X' || tab[r][c] == '1')
+	if (tab [r][c] == 'X' || tab[r][c] == '1' || tab[r][c] == 'E')
 		return ;
-	else if (tab[r][c] == '0')
+	else if (tab[r][c] == '0' || tab[r][c] == 'C')
 	{
 		tab [r][c] = 'X';
 		fill (tab, size, r -1, c);
@@ -26,7 +26,7 @@ void	fill(char **tab, t_point size, int r, int c)
 		fill (tab, size, r, c +1);
 		fill (tab, size, r, c -1);
 	}
-	else if (tab[r][c] == 'P' || tab[r][c] == 'C' || tab[r][c] == 'E')
+	else if (tab[r][c] == 'P' )
 	{
 		fill (tab, size, r -1, c);
 		fill (tab, size, r +1, c);
@@ -76,7 +76,7 @@ int	zero_check(char **map)
 		j = 0;
 		while (map[i][j] != '\n' && map[i][j] != '\0')
 		{
-			if (map[i][j] == '0')
+			if (map[i][j] == 'C')
 				++zero;
 			++j;
 		}
@@ -87,23 +87,24 @@ int	zero_check(char **map)
 
 int	flood_fill_main(char **area)
 {
-	int		len;
-	int		rows;
 	char	**new_area;
 	t_point	size;
 	t_point	player_position;
 
-	len = ft_strlen(area[0]);
-	rows = count_lines(area);
-	size.x = len;
-	size.y = rows;
+	size.x = ft_strlen(area[0]);
+	size.y = count_lines(area);
 	player_position = find_player(area);
 	if (player_position.x == -1 && player_position.y == -1)
 		return (0);
-	new_area = make_area(len, rows, area);
+	new_area = make_area(size.x, size.y, area);
 	flood_fill(new_area, size, player_position);
-	print_map(new_area);
 	if (zero_check(new_area) > 0)
+	{
+		free_map(new_area);
+		return (0);
+	}
+	flood_fill_esc(new_area, size, player_position);
+	if (esc_check(new_area) > 0)
 	{
 		free_map(new_area);
 		return (0);

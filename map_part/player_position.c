@@ -6,7 +6,7 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/22 18:24:09 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/23 16:34:27 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,31 @@ t_point	find_player(char **map)
 		while (map[i][j] != '\n' && map[i][j] != '\0')
 		{
 			if (map[i][j] == 'P')
+			{
+				pos.x = j;
+				pos.y = i;
+				return (pos);
+			}
+			++j;
+		}
+		++i;
+	}
+	return ((t_point){-1, -1});
+}
+
+t_point	find_esc(char **map)
+{
+	int		i;
+	int		j;
+	t_point	pos;
+
+	i = 0;
+	while (map[i] != NULL)
+	{
+		j = 0;
+		while (map[i][j] != '\n' && map[i][j] != '\0')
+		{
+			if (map[i][j] == 'E')
 			{
 				pos.x = j;
 				pos.y = i;
@@ -69,6 +94,5 @@ void	start_player(t_game *game)
 	game -> player_x = start.x;
 	game -> player_y = start.y;
 	game -> col = count_collectibles(game -> map);
-	ft_printf ("%d\n", game -> player_y);
 	return ;
 }

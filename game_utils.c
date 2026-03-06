@@ -6,25 +6,45 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/22 17:47:45 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/23 16:35:21 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	key_code(int keycode, t_game *game)
+void	load_game(t_game *game, void *mlx, void *win, char **map)
+{
+	game -> mlx = mlx;
+	game -> win = win;
+	game -> map = map;
+	game -> moves = 0;
+}
+
+int	key_code(int keycode, t_game *game)
 {
 	if (keycode == 65307)
 		close_game(game);
 	else if (keycode == 119 || keycode == 65362)
+	{
 		(game -> new_y)--;
+		return (1);
+	}
 	else if (keycode == 115 || keycode == 65364)
+	{
 		(game -> new_y)++;
+		return (1);
+	}
 	else if (keycode == 97 || keycode == 65361)
+	{
 		(game -> new_x)--;
+		return (1);
+	}
 	else if (keycode == 100 || keycode == 65363)
+	{
 		(game -> new_x)++;
-	return ;
+		return (1);
+	}
+	return (0);
 }
 
 void	player_moves(t_game *game)
@@ -56,9 +76,11 @@ int	key_handler(int keycode, t_game *game)
 {
 	game -> new_x = game -> player_x;
 	game -> new_y = game -> player_y;
-	key_code(keycode, game);
-	player_moves(game);
-	render_map(game->mlx, game->win, game->map, game->images);
+	if (key_code(keycode, game))
+	{
+		player_moves(game);
+		render_map(game->mlx, game->win, game->map, game->images);
+	}
 	return (0);
 }
 

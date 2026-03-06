@@ -6,7 +6,7 @@
 /*   By: haskalov <haskalov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:37:42 by haskalov          #+#    #+#             */
-/*   Updated: 2026/02/21 22:34:55 by haskalov         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:24:25 by haskalov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,51 @@ void	render_map(void *mlx, void *win, char **map, t_images *imgs)
 	return ;
 }
 
-char	**load_map(void)
+char	check_name(char *f)
 {
-	char	*filename;
+	int	len;
+	int	s;
+	int	z;
+
+	if (!f)
+		return (0);
+	len = ft_strlen(f);
+	if (len <= 4)
+		return (0);
+	s = len - 4;
+	z = len - 5;
+	if (f[z] == '/' || f[z] == ' ' || f[z] == '\t')
+		return (0);
+	if (f[s] == '.' && f[s + 1] == 'b' && f[s + 2] == 'e' && f[s + 3] == 'r')
+		return (1);
+	return (0);
+}
+
+char	**load_map(char *filename)
+{
 	char	**map;
 
-	filename = "map/map.ber";
-	map = read_map(filename);
-	if (!map || !validate_map(map) || !flood_fill_main(map))
+	if (!check_name (filename))
 	{
-		error();
-		free_map(map);
-		return (0);
+		error_msg("Not possible to read map!");
+		return (NULL);
 	}
-	print_map (map);
+	map = read_map(filename);
+	if (!map)
+	{
+		error_msg("No valid map!");
+		return (NULL);
+	}
+	if (!validate_map(map))
+	{
+		free_map(map);
+		return (NULL);
+	}
+	if (!flood_fill_main(map))
+	{
+		error_msg("Flood_fill fail!");
+		free_map(map);
+		return (NULL);
+	}
 	return (map);
 }

@@ -45,8 +45,14 @@ AI used well for explanation new terms and functions + for helping understand wh
 
 DEBUG_FLAGS = -g -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer (for segfault + memory leaks)
 
-####Testing norminette without MiniLibx
+#### Testing norminette without MiniLibx
 
 norminette $(find . -name "*.c" -not -path "./minilibx/*")
+
+#### Gemartin's tester 
+
+https://github.com/gemartin99/So_long-Tester/tree/main
+start test: bash Tester_so_long.sh 
+
 
 

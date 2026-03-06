@@ -21,14 +21,15 @@ MLX_FLAGS = -lXext -lX11 -lm
 
 # Sources
 SRCS =	./map_part/flood_fill.c \
+		./map_part/flood_fill_esc.c \
 		./map_part/load_map.c \
 		./map_part/map_utils.c \
 		./map_part/player_position.c \
 		./map_part/read_map.c \
 		./map_part/validate_map_1.c \
 		./map_part/validate_map_2.c \
-		./game_utils.c \
-		./utils.c \
+		game_utils.c \
+		utils.c \
 		main.c 
 
 # Objscd
@@ -47,7 +48,7 @@ $(MLX):
 	make -C  ./minilibx
 
 $(NAME): $(OBJS) $(FT_PRINTF) $(G_N_L) $(MLX) 
-	$(CC) $(OBJS) $(FT_PRINTF)	$(G_N_L)  $(MLX) $(CFLAGS) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(OBJS) $(FT_PRINTF)	$(G_N_L)  $(MLX) $(CFLAGS) $(MLX_FLAGS)  $(DEBUG_FLAGS) -o $(NAME)
 
 # Translate .c → .o
 %.o: %.c
