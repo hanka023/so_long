@@ -20,7 +20,7 @@ Compile program use make (or make re)
 
 start game:  ./so_long [map]      example: ./so_long map/map.ber   
 
-(write "./so_long map/map.ber" into terminal)
+(write "./so_long map/map.ber" into terminal) you must have valid map in "map" folder
 
 The window with game should appear, if no, in terminal shoud be written "Error". 
 This should happen, if you have not a valid map. 
